@@ -11,7 +11,6 @@ import java.util.Collection;
 @EqualsAndHashCode
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
-    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,8 +42,17 @@ public class Role implements GrantedAuthority {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String getAuthority() {
         return getName();
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

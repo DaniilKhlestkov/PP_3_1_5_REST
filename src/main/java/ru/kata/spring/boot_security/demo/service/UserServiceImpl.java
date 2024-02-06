@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUserName(String name) {
-        return userDao.findByUserName(name);
+    public User findByUserEmail(String email) {
+        return userDao.findByUserEmail(email);
     }
 
     @Override
@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.addUser(user);
     }
 
@@ -51,11 +50,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
-        if (user.getPassword().isEmpty()) {
-            user.setPassword(getUser(user.getId()).getPassword());
-        } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
         userDao.updateUser(user);
     }
 }

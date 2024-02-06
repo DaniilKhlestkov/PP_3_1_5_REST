@@ -2,13 +2,13 @@ package ru.kata.spring.boot_security.demo.Dao;
 
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
-;import java.util.Set;
+;import java.util.List;
+
 
 @Repository
 public interface RoleDao {
-    Set<Role> getRoles();
+    List<Role> getRoles();
 
     Role findById(Long id);
-    Role findByName(String name);
-
+    void addRole(Role role);
 }

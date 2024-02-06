@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface UserDao {
-    User findByUserName(String name);
+    User findByUserEmail(String email);
 
     User getUser(Long id);
 
