@@ -7,10 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import ru.kata.spring.boot_security.demo.Dao.UserDao;
-import ru.kata.spring.boot_security.demo.Dao.UserDaoImpl;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.dao.UserDaoImpl;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+
 
 import java.util.Collection;
 import java.util.stream.Collectors;

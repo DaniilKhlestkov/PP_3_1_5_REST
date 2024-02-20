@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.Dao;
+package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,8 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -27,9 +26,17 @@ public class RoleDaoImpl implements RoleDao {
         return entityManager.find(Role.class, id);
     }
 
+    @Override
+    public Role findByName(String name) {
+        Query query = entityManager.createQuery("SELECT r FROM Role r WHERE r.name = :name");
+        query.setParameter("name", name);
+        return (Role) query.getSingleResult();
+    }
+
     @Transactional
     @Override
     public void addRole(Role role) {
         entityManager.persist(role);
     }
+
 }

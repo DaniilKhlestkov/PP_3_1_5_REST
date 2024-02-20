@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.Dao;
+package ru.kata.spring.boot_security.demo.dao;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void addUser(User user) {
-        entityManager.merge(user);
+        entityManager.persist(user);
     }
 
     @Override
