@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.User;
 
-
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -26,8 +27,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Transactional
-    public User getUser(Long id) {
-        return entityManager.find(User.class, id);
+    public Optional<User> getUser(Long id) {
+        User user = entityManager.find(User.class, id);
+        return Optional.of(Optional.ofNullable(user).orElseThrow(() -> new EntityNotFoundException("User with id " + id + "not found")));
     }
 
     @Override
@@ -45,12 +47,17 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void removeUser(Long id) {
-        entityManager.remove(getUser(id));
+        var user = getUser(id);
+        if (user.isPresent()) {
+            entityManager.remove(user.get());
+        } else {
+            throw new EntityNotFoundException("User with id " + id + " not found");
+        }
     }
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(Long id, User user) {
         entityManager.merge(user);
     }
 
